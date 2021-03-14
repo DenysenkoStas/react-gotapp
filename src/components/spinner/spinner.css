@@ -1,0 +1,87 @@
+@keyframes ldio-mn02s8z931 {
+	0% {
+		opacity: 1
+	}
+	100% {
+		opacity: 0
+	}
+}
+
+.loadingio-spinner {
+	margin: auto;
+	width: 200px;
+	height: 200px;
+	display: block;
+	overflow: hidden;
+	background: none;
+}
+
+.lds-spin {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	transform: translateZ(0) scale(1);
+	backface-visibility: hidden;
+	transform-origin: 0 0; /* see note above */
+}
+
+.lds-spin div {
+	box-sizing: content-box;
+	left: 85px;
+	top: 45px;
+	position: absolute;
+	animation: ldio-mn02s8z931 linear 1s infinite;
+	background: #1d3f72;
+	width: 30px;
+	height: 30px;
+	border-radius: 15px / 15px;
+	transform-origin: 15px 55px;
+}
+
+.lds-spin div:nth-child(1) {
+	transform: rotate(0deg);
+	animation-delay: -0.875s;
+	background: #1d3f72;
+}
+
+.lds-spin div:nth-child(2) {
+	transform: rotate(45deg);
+	animation-delay: -0.75s;
+	background: #1d3f72;
+}
+
+.lds-spin div:nth-child(3) {
+	transform: rotate(90deg);
+	animation-delay: -0.625s;
+	background: #1d3f72;
+}
+
+.lds-spin div:nth-child(4) {
+	transform: rotate(135deg);
+	animation-delay: -0.5s;
+	background: #1d3f72;
+}
+
+.lds-spin div:nth-child(5) {
+	transform: rotate(180deg);
+	animation-delay: -0.375s;
+	background: #1d3f72;
+}
+
+.lds-spin div:nth-child(6) {
+	transform: rotate(225deg);
+	animation-delay: -0.25s;
+	background: #1d3f72;
+}
+
+.lds-spin div:nth-child(7) {
+	transform: rotate(270deg);
+	animation-delay: -0.125s;
+	background: #1d3f72;
+}
+
+.lds-spin div:nth-child(8) {
+	transform: rotate(315deg);
+	animation-delay: 0s;
+	background: #1d3f72;
+}
