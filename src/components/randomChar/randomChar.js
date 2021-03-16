@@ -5,16 +5,21 @@ import ErrorMessage from '../errorMessage';
 import './randomChar.css';
 
 export default class RandomChar extends Component {
-    constructor() {
-        super();
-        this.updateChar(); // обновление при загрузке страницы
-    }
-
     gotService = new gotService();
+
     state = {
         char: {},
         loading: true,
         error: false
+    }
+
+    componentDidMount() { // хук появления компонента на странице
+        this.updateChar(); // обновление при загрузке страницы
+        this.timerId = setInterval(this.updateChar, 5000); // интервал обновления персонажа
+    }
+
+    componentWillUnmount() { // хук удаления компонента на странице
+        clearInterval(this.timerId); // очистка обнвления персонажа при скрытии
     }
 
     onCharLoaded = char => {
@@ -24,14 +29,14 @@ export default class RandomChar extends Component {
         })
     }
 
-    onError = err => {
+    onError = () => {
         this.setState({
             error: true,
             loading: false
         })
     }
 
-    updateChar() {
+    updateChar = () => {
         const id = Math.floor(Math.random() * 140 + 25); // рандомное получение id от 25-140
         this.gotService.getCharacter(id)
             .then(this.onCharLoaded)

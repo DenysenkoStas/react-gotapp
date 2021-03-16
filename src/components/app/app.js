@@ -2,12 +2,17 @@ import React, {Component} from 'react';
 import {Col, Row, Container} from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
-import ItemList from '../itemList';
-import CharDetails from '../charDetails';
+import ErrorMessage from '../errorMessage';
+import CharacterPage from '../characterPage';
 
 export default class App extends Component {
     state = {
-        showRandomChar: true
+        showRandomChar: true,
+        error: false
+    }
+
+    componentDidCatch() { // хук, если произошла ошибка
+        this.setState({error: true});
     }
 
     // переключение случайного персонажа
@@ -18,8 +23,12 @@ export default class App extends Component {
     }
 
     render() {
-        const {showRandomChar} = this.state;
+        const {showRandomChar, error} = this.state;
         const randomChar = showRandomChar ? <RandomChar/> : null;
+
+        if (error) {
+            return <ErrorMessage/> // вывод ошибки
+        }
 
         return (
             <>
@@ -35,14 +44,7 @@ export default class App extends Component {
                             </button>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col md='6'>
-                            <ItemList/>
-                        </Col>
-                        <Col md='6'>
-                            <CharDetails/>
-                        </Col>
-                    </Row>
+                    <CharacterPage/>
                 </Container>
             </>
         );
