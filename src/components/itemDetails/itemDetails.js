@@ -1,49 +1,46 @@
 import React, {Component} from 'react';
-import gotService from '../../services/gotService';
 import ErrorMessage from '../errorMessage';
 import Spinner from '../spinner';
-import './charDetails.css';
+import './itemDetails.css';
 
-const Field = ({char, field, label}) => {
+const Field = ({item, field, label}) => {
     return (
         <li className="list-group-item d-flex justify-content-between">
             <span className="term">{label}</span>
-            <span>{char[field]}</span>
+            <span>{item[field]}</span>
         </li>
     )
 }
 
 export {Field};
 
-export default class CharDetails extends Component {
-    gotService = new gotService();
-
+export default class ItemDetails extends Component {
     state = {
-        char: null,
+        item: null,
         loading: true,
         error: false
     }
 
     componentDidMount() {
-        this.updateChar();
+        this.updateItem();
     }
 
     componentDidUpdate(prevProps) { // сравнение с предыдущем пропсом при обновлении компонента
-        if (this.props.charId !== prevProps.charId) {
-            this.updateChar();
+        if (this.props.itemId !== prevProps.itemId) {
+            this.updateItem();
         }
     }
 
-    onCharDetailsLoaded = char => {
+    onItemDetailsLoaded = item => {
         this.setState({
-            char,
+            item,
             loading: false
         })
     }
 
-    updateChar() {
-        const {charId} = this.props;
-        if (!charId) {
+    updateItem() {
+        const {itemId, getData} = this.props;
+        if (!itemId) {
             return null;
         }
 
@@ -51,42 +48,42 @@ export default class CharDetails extends Component {
             loading: true
         })
 
-        this.gotService.getCharacter(charId)
-            .then(this.onCharDetailsLoaded)
-            .catch(() => this.onError())
-        // this.foo.bar = 0;
+        getData(itemId)
+            .then((item) => this.onItemDetailsLoaded(item))
+            .catch(() => this.onError());
     }
 
     onError() {
         this.setState({
-            char: null,
+            item: null,
             error: true
         })
     }
 
     render() {
-        if (!this.state.char && this.state.error) {
+        const {item, loading, error} = this.state;
+
+        if (!item && error) {
             return <ErrorMessage/>
-        } else if (!this.state.char) {
+        } else if (!item) {
             return <span className='select-error'>Please select a character</span>
         }
 
-        if (this.state.loading) {
+        if (loading) {
             return (
-                <div className="char-details rounded">
+                <div className="item-details rounded">
                     <Spinner/>
                 </div>
             )
         }
 
-        const {char} = this.state;
-        const {name} = char;
+        const {name} = item;
         return (
-            <div className="char-details rounded">
+            <div className="item-details rounded">
                 <h4>{name}</h4>
                 <ul className="list-group list-group-flush">
                     {React.Children.map(this.props.children, (child) => {
-                        return React.cloneElement(child, {char})
+                        return React.cloneElement(child, {item})
                     })}
                 </ul>
             </div>

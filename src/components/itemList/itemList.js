@@ -22,14 +22,7 @@ export default class ItemList extends Component {
             .catch(() => this.onError());
     }
 
-    componentDidCatch() {
-        this.setState({
-            itemList: null,
-            error: true
-        })
-    }
-
-    onError(status) {
+    onError() {
         this.setState({
             itemList: null,
             error: true

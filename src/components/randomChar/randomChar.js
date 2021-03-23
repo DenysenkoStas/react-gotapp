@@ -19,7 +19,7 @@ export default class RandomChar extends Component {
     }
 
     componentWillUnmount() { // хук удаления компонента на странице
-        clearInterval(this.timerId); // очистка обнвления персонажа при скрытии
+        clearInterval(this.timerId); // очистка обновления персонажа при скрытии
     }
 
     onCharLoaded = char => {
