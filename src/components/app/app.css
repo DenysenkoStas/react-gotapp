@@ -1,0 +1,14 @@
+.random-btn {
+    margin-bottom: 40px;
+}
+
+.app {
+    min-height: 100vh;
+    font-size: 16px;
+    background: #152C36 url('got.jpeg') center center no-repeat;
+    background-size: cover;
+}
+
+.title {
+    color: #ffffff;
+}
