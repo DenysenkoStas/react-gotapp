@@ -1,0 +1,16 @@
+.not-found {
+    padding: 25px;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.not-found h1 {
+    font-size: 100px;
+    font-weight: 700;
+}
+
+.not-found p {
+    margin-bottom: 30px;
+    font-size: 20px;
+    text-transform: uppercase;
+}

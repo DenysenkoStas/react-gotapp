@@ -1,3 +1,16 @@
-.random-block img {
-	width: 100%;
+.error-message {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 25px;
+	background-color: #ffffff;
+}
+
+.error-message img {
+	max-width: 400px;
+}
+
+.error-message span {
+	font-size: 20px;
+	text-transform: uppercase;
 }

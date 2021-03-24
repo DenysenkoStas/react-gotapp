@@ -4,7 +4,8 @@ import Header from '../header';
 import RandomChar from '../randomChar';
 import ErrorMessage from '../errorMessage';
 import {CharactersPage, HousesPage, BooksPage, BooksItem} from '../pages';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import NotFound from '../notFound';
 import './app.css';
 
 export default class App extends Component {
@@ -47,16 +48,20 @@ export default class App extends Component {
                                 </button>
                             </Col>
                         </Row>
-                        <Route path='/' exact component={() => <h1 className="title">Welcome to GOT DB</h1>}/>
-                        <Route path='/characters' component={CharactersPage}/>
-                        <Route path='/houses' component={HousesPage}/>
-                        <Route path='/books' exact component={BooksPage}/>
-                        <Route path='/books/:id' render={
-                            ({match}) => {
-                                const {id} = match.params;
-                                return <BooksItem bookId={id}/> // отрисовка BooksItem с нужным id
-                            }
-                        }/>
+                        <Switch>
+                            <Route path='/' exact component={() => <h1 className="title">Welcome to GOT DB</h1>}/>
+                            <Route path='/characters' exact component={CharactersPage}/>
+                            <Route path='/houses' exact component={HousesPage}/>
+                            <Route path='/books' exact component={BooksPage}/>
+                            <Route path='/books/:id' render={
+                                ({match}) => {
+                                    const {id} = match.params;
+                                    if (match.params)
+                                    return <BooksItem bookId={id}/> // отрисовка BooksItem с нужным id
+                                }
+                            }/>
+                            <Route component={NotFound}/>
+                        </Switch>
                     </Container>
                 </div>
             </Router>
