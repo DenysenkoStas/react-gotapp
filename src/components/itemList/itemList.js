@@ -1,12 +1,21 @@
 import React, {Component} from 'react';
 import Spinner from '../spinner';
 import ErrorMessage from '../errorMessage';
+import PropTypes from 'prop-types';
 import './itemList.css';
 
 export default class ItemList extends Component {
     state = {
         itemList: null,
         error: false
+    }
+
+    static defaultProps = {
+        onItemSelected: () => {} // свойство по умолчанию, если нет id
+    }
+
+    static propTypes = {
+        onItemSelected: PropTypes.func // проверка на функцию
     }
 
     componentDidMount() {
